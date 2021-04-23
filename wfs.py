@@ -13,7 +13,7 @@ def brute(username, password):
         print("[+] Password found : ",password)
         sys.exit()
     else:
-        print r.content," ",password
+        print(r.content," ",password)
 
 def main():
     words = [w.strip() for w in open("password.txt", "rb").readlines()]
