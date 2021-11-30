@@ -1,6 +1,12 @@
-# Wi-Fi Sploit
+<br />
+<div align="center">
+  <img src="https://github.com/kevinadhiguna/wifi-sploit/blob/master/assets/wifi-sploit.png" />
+  <h3 align="center">Wi-Fi Sploit</h3>
 
-Wi-Fi sploit is a password cracker for an admin page of a Wi-Fi Router.
+  <p align="center">
+   🔒 A password cracker for an admin page of a Wi-Fi router
+  </p>
+</div>
 
 <br />
 
