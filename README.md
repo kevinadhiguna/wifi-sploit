@@ -42,7 +42,15 @@ pip3 install -r requirements.txt
 
 <br />
 
-3. Run this program :
+3. Run this program.
+
+<br />
+
+Before running the program, it is recommended to have a look at [address.md](https://github.com/kevinadhiguna/wifi-sploit/blob/master/address.md) to check Wi-Fi router's IP address. Also, some notes regarding to username and password of router is mentioned in `wfs.py`.
+
+<br />
+
+If you are sure about `Wi-Fi router's IP address` and `username`, try running :
 ```bash
 python wfs.py
 ```
