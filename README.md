@@ -4,6 +4,19 @@ Wi-Fi sploit is a password cracker for an admin page of a Wi-Fi Router.
 
 <br />
 
+## Prerequisites
+
+1. Your laptop/computer must be **connected to Wi-Fi** whose router will be pentested.
+2. A laptop/computer that has `python` or `python3` installed.
+
+### How to install Python/Python3
+
+- [Windows](https://www.python.org/downloads/windows/)
+- [MacOS](https://www.python.org/downloads/macos/)
+- Linux/Unix (Well.. python comes preinstalled on most Linux distributions. Otherwise you can download it here: https://www.python.org/downloads/source/)
+
+<br />
+
 ## How to Run :
 1. Clone this repository :
 ```bash
