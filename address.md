@@ -1,3 +1,47 @@
+## Router's IP address
+
+This tool requires one to connect to a Wi-Fi whose router is pentested. Therefore, figuring out the router's IP address in the network (Local Area Network) is a must. 
+
+<br />
+
+### Windows
+
+In Windows, you can open Command Prompt (CMD) then execute `ipconfig` to see router's IP address.
+
+<br />
+
+### MacOS
+
+1. Click the Wi-Fi symbol on the menu bar.
+2. Click **Network Preferences**.
+3. On the **Wi-Fi** tab, click **Advanced** button.
+4. Press on **TCP/IP** tab, your Wi-Fi router IP address will be listed under the Router.
+
+<br />
+
+### Linux
+
+Based on [this answer on StackOverflow](https://askubuntu.com/a/605476), try one of these commands : 
+
+```bash
+netstat -nr | awk '$1 == "0.0.0.0"{print$2}'
+```
+
+```bash
+ip route show | grep -i 'default via'| awk '{print $3 }'
+```
+
+The output should look like `192.168.1.1` that indicates the Internet Gateway of your Local Area Network (Wi-Fi).
+
+<br />
+<hr />
+
+<br />
+
+## Default router's IP address
+
+Here is some routers' IP addresses :
+
 |    <br>Router Brand<br>   |                                                                                           <br>Login IP<br>                                                                                          |
 |:-------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 | 2Wire                     | 192.168.1.1<br>192.168.0.1<br>192.168.1.254<br>10.0.0.138                                                                                                                                           |
