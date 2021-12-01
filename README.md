@@ -23,6 +23,14 @@
 
 <br />
 
+## Before running the program..
+
+- It is recommended to have a look at [address.md](https://github.com/kevinadhiguna/wifi-sploit/blob/master/address.md) to check Wi-Fi router's IP address.
+- Some default Wi-Fi router's usernames : [username.txt](https://github.com/kevinadhiguna/wifi-sploit/blob/master/username.txt)
+- Some default Wi-Fi router's passwords : [password.txt](https://github.com/kevinadhiguna/wifi-sploit/blob/master/password.txt)
+
+<br />
+
 ## How to Run :
 1. Clone this repository :
 ```bash
@@ -43,10 +51,6 @@ pip3 install -r requirements.txt
 <br />
 
 3. Run this program.
-
-<br />
-
-Before running the program, it is recommended to have a look at [address.md](https://github.com/kevinadhiguna/wifi-sploit/blob/master/address.md) to check Wi-Fi router's IP address. Also, some notes regarding to username and password of router is mentioned in `wfs.py`.
 
 <br />
 
