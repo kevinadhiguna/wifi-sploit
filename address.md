@@ -91,3 +91,21 @@ Here is some routers' IP addresses :
 | Zoom                      | 192.168.1.1<br>192.168.2.1<br>192.168.4.1<br>192.168.10.1<br>192.168.1.254<br>10.0.0.2<br>10.0.0.138                                                                                                |
 | ZTE                       | 192.168.1.1<br>192.168.0.1<br>192.168.100.100<br>192.168.1.254<br>192.168.2.1<br>192.168.2.254                                                                                                      |
 | Zyxel                     | 192.168.1.1<br>192.168.0.1<br>192.168.2.1<br>192.168.4.1<br>192.168.10.1<br>192.168.1.254<br>192.168.254.254<br>10.0.0.2<br>10.0.0.138                                                              |
+<br />
+
+>"Why most of them starts with 192.168.XXX.XXX ?", "Also why 10.XXX.XXX.XXX ?"
+
+<br />
+
+According to [RFC 1918](https://datatracker.ietf.org/doc/html/rfc1918#section-3), The Internet Assigned Numbers Authority (IANA), an organization that controls global IP address allocation, DNS management, and other Internet-related things, has reserved the following three blocks of the IP address space for private internets:
+- **10.0.0.0    - 10.255.255.255**  (10/8 prefix)
+- **172.16.0.0  - 172.31.255.255**  (172.16/12 prefix)
+- **192.168.0.0 - 192.168.255.255** (192.168/16 prefix)
+
+By the way, RFC that stands for Request for Comments, is simply a kind of a standard of the Internet published by IETF.
+
+<br />
+
+Sources :
+- [iana.org](https://www.iana.org/)
+- [What is RFC ? - Wikipedia](https://en.wikipedia.org/wiki/Request_for_Comments)
