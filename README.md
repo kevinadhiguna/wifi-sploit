@@ -39,7 +39,14 @@ git clone https://github.com/kevinadhiguna/wifi-sploit.git
 
 <br />
 
-2. Install dependencies :
+2. Change directory to `wifi-sploit` : 
+```bash
+cd wifi-sploit
+```
+
+<br />
+
+3. Install dependencies :
 ```bash
 pip install -r requirements.txt
 ```
@@ -50,7 +57,7 @@ pip3 install -r requirements.txt
 
 <br />
 
-3. Run this program.
+4. Run this program.
 
 <br />
 
@@ -63,7 +70,7 @@ Note: You can also run it with python3. In case of that, just replace `python` w
 
 <br/>
 
-4. You will see the appropriate password. Otherwise, the correct password may not be listed in the `password.txt`. In that case, you can add the most commonly used password in the `password.txt`.
+5. You will see the appropriate password. Otherwise, the correct password may not be listed in the `password.txt`. In that case, you can add the most commonly used password in the `password.txt`.
 
 <br />
 <hr />
