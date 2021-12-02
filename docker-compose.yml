@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  wifi-sploit:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: wifi_sploit_ctr
