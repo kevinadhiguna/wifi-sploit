@@ -10,6 +10,12 @@
 
 <br />
 
+## Status
+
+🚧 Currently under development, originally created using Python 2.7 but trying to make it compatible with Python 3.
+
+<br />
+
 ## Prerequisites
 
 1. Your laptop/computer must be **connected to Wi-Fi** whose router will be pentested.
