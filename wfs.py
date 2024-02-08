@@ -1,7 +1,10 @@
 import requests
 import sys
 
-url = "http://192.168.1.1" # Be sure about the router ip
+url = input("Router's ip (default: 192.168.1.1): ") # Be sure about the router ip
+
+if not url:
+    url = 'http://192.168.1.1'
 
 expression = {b"failed", b"error", b"incorrect", b"failure", b"try", b"again", b"invalid", b"upgrade", b"outdated", b"browser", b"fail"}
 
