@@ -1,9 +1,9 @@
 import requests
 import sys
 
-url = "http://192.168.1.1"
+url = "http://192.168.1.1" # Be sure about the router ip
 
-expression = {b"failed", b"error", b"incorrect", b"failure", b"try", b"again", b"invalid", b"upgrade", b"outdated", b"browser"}
+expression = {b"failed", b"error", b"incorrect", b"failure", b"try", b"again", b"invalid", b"upgrade", b"outdated", b"browser", b"fail"}
 
 def brute(username, password, combinations_tested, total_combinations):
     data = {'username': username, 'password': password}
