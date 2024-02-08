@@ -9,7 +9,11 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-url = "http://192.168.1.1" # Be sure about the router ip
+url = input("Router's ip (default: 192.168.1.1): ") # Be sure about the router ip
+
+if not url:
+    url = 'http://192.168.1.1'
+
 expression = {b"failed", b"error", b"incorrect", b"failure", b"try", b"again", b"invalid", b"upgrade", b"outdated", b"browser", b"fail"}
 
 def brute(username, password, combinations_tested, total_combinations, use_selenium=False):
