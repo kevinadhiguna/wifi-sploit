@@ -27,7 +27,7 @@ def brute_with_selenium(username, password):
         password_input.send_keys(password)
         password_input.submit()
 
-    driver_lower_content = driver.page_source.lower().encode('utf-8')
+        driver_lower_content = driver.page_source.lower().encode('utf-8')
 
         if not any(item in driver_lower_content for item in EXPRESSIONS):
             print("\nBrute Forcing...")
