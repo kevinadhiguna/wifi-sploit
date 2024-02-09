@@ -14,7 +14,7 @@ URL = input("Router's ip (default: 192.168.1.1): ") # Be sure about the router i
 if not URL:
     URL = 'http://192.168.1.1'
 
-EXPRESSIONS = {b"failed", b"error", b"incorrect", b"failure", b"try", b"again", b"invalid", b"upgrade", b"outdated", b"browser", b"fail"}
+EXPRESSIONS = {b"failed", b"error", b"incorrect", b"failure", b"try", b"again", b"invalid", b"upgrade", b"outdated", b"browser"}
 
 def brute_with_selenium(username, password):
     options = Options()
