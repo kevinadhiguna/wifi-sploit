@@ -6,7 +6,7 @@ url = input("Router's ip (default: 192.168.1.1): ") # Be sure about the router i
 if not url:
     url = 'http://192.168.1.1'
 
-expression = {b"failed", b"error", b"incorrect", b"failure", b"try", b"again", b"invalid", b"upgrade", b"outdated", b"browser", b"fail"}
+expression = {b"failed", b"error", b"incorrect", b"failure", b"try", b"again", b"invalid", b"upgrade", b"outdated", b"browser"}
 
 def brute(username, password, combinations_tested, total_combinations):
     data = {'username': username, 'password': password}
@@ -33,6 +33,7 @@ def brute(username, password, combinations_tested, total_combinations):
     sys.stdout.flush()
     if b"upgrade" in r_content or b"outdated" in r_content or b"browser" in r_content:
         print("\nError:", r_content)
+        print("\rIt's recommended to use wfs-browser-input.py")
         sys.exit()
     if not any(item in r_content for item in expression):
         print("\nBrute Forcing...")
