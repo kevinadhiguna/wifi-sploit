@@ -24,7 +24,7 @@ def get_user_input(default, prompt, color):
     return user_input
 
 def main():
-    url = get_user_input('http://192.168.1.1', "Router's ip (default: 192.168.1.1): ", RESET)
+    url = get_user_input('http://192.168.1.1', "Router's ip (format: http/https://<url>:<port>/<login-file> (the port is optional if it is 80) (default: http://192.168.1.1) : ", RESET)
     print("\r")
 
     expression = {b"error", b"incorrect", b"failure", b"try", b"again", b"invalid"}
