@@ -1,7 +1,7 @@
 import requests
 import sys
 
-url = input("Router's ip (default: 192.168.1.1): ") # Be sure about the router ip
+url = input("Router's ip (format: http/https://<url>:<port>/<login-file> (the port is optional if it is 80) (default: http://192.168.1.1): ") # Be sure about the router ip
 
 if not url:
     url = 'http://192.168.1.1'
