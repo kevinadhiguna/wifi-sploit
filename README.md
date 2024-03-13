@@ -1,7 +1,7 @@
 <div style="display: flex; justify-content: space-between;">
-    <img src="https://github.com/d4v1-sudo/wifi-sploit/raw/master/assets/router.jpg" style="text-align: left ; height:50px; width:50px" />
-    <img src="https://github.com/d4v1-sudo/wifi-sploit/raw/master/assets/slash.png" style="text-align: center ; height:50px; width:50px" />
-    <img src="https://github.com/d4v1-sudo/wifi-sploit/raw/master/assets/www.jpg" style="text-align: right ; height:50px; width:50px" />
+    <img src="https://github.com/d4v1-sudo/wifi-sploit/raw/master/assets/router.jpg" style="text-align: left ; height:25%; width:25%" />
+    <img src="https://github.com/d4v1-sudo/wifi-sploit/raw/master/assets/slash.png" style="text-align: center ; height:25%; width:25%" />
+    <img src="https://github.com/d4v1-sudo/wifi-sploit/raw/master/assets/www.jpg" style="text-align: right ; height:25%; width:25%" />
 </div>
 <h3 style="text-align:center;">WiFi-Sploit</h3>
 <p style="text-align:center;">
