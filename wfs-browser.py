@@ -86,8 +86,26 @@ def main():
     combinations_tested = 0
     use_selenium = False
 
-    usernames = [u.strip() for u in open("username.txt", "r").readlines()]
-    passwords = [p.strip() for p in open("password.txt", "r").readlines()]
+    while True:
+        usernames_file = input("Usernames file location (default: usernames.txt): ")
+        if not usernames_file:
+            usernames_file = "usernames.txt"
+        passwords_file = input("Passwords file location (default: passwords.txt): ")
+        if not passwords_file:
+            passwords_file = "passwords.txt"
+
+        try:
+            with open(usernames_file, "r") as user_file:
+                usernames = [u.strip() for u in user_file.readlines()]
+            with open(passwords_file, "r") as pass_file:
+                passwords = [p.strip() for p in pass_file.readlines()]
+            break
+        except FileNotFoundError:
+            print("One or both files not found. Please provide valid file locations.")
+        except PermissionError:
+            print("Permission denied. Please check file permissions and try again.")
+        except Exception as e:
+            print(f"An error occurred while loading files: {e}")
     total_combinations = len(usernames) * len(passwords)
 
     try:
