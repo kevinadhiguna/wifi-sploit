@@ -24,10 +24,18 @@ def get_user_input(default, prompt, color):
     return user_input
 
 def main():
-    url = get_user_input('http://192.168.1.1', "Router's ip (format: http/https://<url>:<port>/<login-file> (the port is optional if it is 80) (default: http://192.168.1.1) : ", RESET)
+    usage = input("Show URL usage? y/n: ")
+    if usage.lower() == "y":
+        print("Enter the login page URL, for example: https://site.com:1234/login-page/login.html ")
+        print("- The file depends on how the login page was created, simply look at the login page URL and see if it has a file name. If not, just don't put anything after the URL.")
+        print("- The port depends on whether the site supports HTTP or HTTPS. If it's on port 443, use HTTPS in the URL. If the site uses port 80, use HTTP in the URL. Or if the site has another service port, simply specify it in the URL.")
+        print("URL format: http/https://<url>:<port>/<directory>/<login-file>")
+    else:
+        pass
+    url = get_user_input('http://192.168.1.1', "Router's ip (default: http://192.168.1.1) : ", RESET)
     print("\r")
 
-    expression = {b"error", b"incorrect", b"failure", b"try", b"again", b"invalid"}
+    expression = {b"error", b"incorrect", b"failure", b"try", b"again", b"invalid"}  #you can add your own login page errors messages here
 
     u_name = get_user_input("username", "Username html element name (default: username): ", YELLOW)
     username_element_type = get_user_input("i", "Is username element an id or a name? (i/n): ", YELLOW)
