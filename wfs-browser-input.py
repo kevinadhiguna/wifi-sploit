@@ -83,10 +83,10 @@ def main():
     while True:
         usernames_file = input("Usernames file location (default: username.txt): ")
         if not usernames_file:
-            usernames_file = "usernames.txt"
+            usernames_file = "username.txt"
         passwords_file = input("Passwords file location (default: password.txt): ")
         if not passwords_file:
-            passwords_file = "passwords.txt"
+            passwords_file = "password.txt"
 
         try:
             with open(usernames_file, "r") as user_file:
