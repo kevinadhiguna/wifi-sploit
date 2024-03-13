@@ -1,7 +1,7 @@
 <br />
-<div align="center">
+<div align="left">
   <img src="https://github.com/kevinadhiguna/wifi-sploit/blob/master/assets/wifi-sploit.png" />
-  <h3 align="center">Wi-Fi Sploit</h3>
+  <h3 align="center">WiFi-Sploit</h3>
 
   <p align="center">
    🔒 A password cracker for any login page
@@ -14,7 +14,7 @@
 
 ## About
 
--Originally maded for `python2` but now it runs using `pyhon3` too.
+-Originally maded for `python2` but it runs using `pyhon3` too.
 -Originally it was maded for router's login pages but it works fine in any login page site, even on internet.
 
 ## Prerequisites
