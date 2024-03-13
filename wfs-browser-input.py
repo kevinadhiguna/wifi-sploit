@@ -14,6 +14,18 @@ BLUE = "\033[94m"
 GREEN = "\033[92m"
 RESET = "\033[0m"
 
+line1 = "__        _______ ____"
+line2 = "\ \      / /  ___/ ___| YOUR"
+line3 = " \ \ /\ / /| |_  \___ \ LOGIN"
+line4 = "  \ V  V / |  _|  ___) |PAGE"
+line5 = "   \_/\_/  |_|   |____/ SPLOIT"
+
+print(line1)
+print(line2)
+print(line3)
+print(line4)
+print(line5)
+
 def colored_print(text, color):
     return f"{color}{text}{RESET}"
 
