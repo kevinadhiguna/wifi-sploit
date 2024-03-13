@@ -1,12 +1,19 @@
 <br />
 <div align="left">
-  <img src="https://github.com/kevinadhiguna/wifi-sploit/blob/master/assets/wifi-sploit.png" />
+  <img src="https://github.com/d4v1-sudo/wifi-sploit/blob/master/assets/router.jpg" />
+</div>
+<div align="center">
+  <img src="https://github.com/d4v1-sudo/wifi-sploit/blob/master/assets/slash.jpg" />
+</div>
+<div align="right">
+  <img src="https://github.com/d4v1-sudo/wifi-sploit/blob/master/assets/www.jpg" />
+</div>
   <h3 align="center">WiFi-Sploit</h3>
 
   <p align="center">
    🔒 A password cracker for any login page
   </p>
-</div>
+
 
 <br />
 
