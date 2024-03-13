@@ -12,6 +12,11 @@
 
 <br />
 
+## About
+
+-Originally maded for `python2` but now it runs using `pyhon3` too.
+-Originally it was maded for router's login pages but it works fine in any login page site, even on internet.
+
 ## Prerequisites
 
 1. Your laptop/computer must be **connected to the Wi-Fi** network whose router or site login page will be pentested.
@@ -27,7 +32,7 @@
 
 ## About the Scripts
 
-Wi-Fi Sploit provides three scripts:
+Wifi-Sploit provides three scripts:
 
 ### wfs.py
 
@@ -56,7 +61,7 @@ Wi-Fi Sploit provides three scripts:
 
 <br />
 
-## Before Running the `wfs-browser.py` and `wfs-browser-input.py` scripts:
+## Before Running the `wfs-browser.py` and `wfs-browser-input.py`:
 
 - On linux:
 ```bash
