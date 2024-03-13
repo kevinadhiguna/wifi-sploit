@@ -1,11 +1,11 @@
 <br />
-<div style="text-align:left; height:100px; width:100px; display:inline-block;">
+<div style="text-align:left; height:100px; width:50px; display:inline-block;">
   <img src="https://github.com/d4v1-sudo/wifi-sploit/raw/master/assets/router.jpg" style="height:100%; width:100%;" />
 </div>
-<div style="text-align:center; height:100px; width:100px; display:inline-block;">
+<div style="text-align:center; height:100px; width:50px; display:inline-block;">
   <img src="https://github.com/d4v1-sudo/wifi-sploit/raw/master/assets/slash.png" style="height:100%; width:100%;" />
 </div>
-<div style="text-align:right; height:100px; width:100px; display:inline-block;">
+<div style="text-align:right; height:100px; width:50px; display:inline-block;">
   <img src="https://github.com/d4v1-sudo/wifi-sploit/raw/master/assets/www.jpg" style="height:100%; width:100%;" />
 </div>
 <h3 style="text-align:center;">WiFi-Sploit</h3>
