@@ -67,10 +67,10 @@ def brute(username, password, combinations_tested, total_combinations):
 def main():
     combinations_tested = 0
     while True:
-        usernames_file = input("Usernames file location (default: usernames.txt): ")
+        usernames_file = input("Usernames file location (default: username.txt): ")
         if not usernames_file:
             usernames_file = "usernames.txt"
-        passwords_file = input("Passwords file location (default: passwords.txt): ")
+        passwords_file = input("Passwords file location (default: password.txt): ")
         if not passwords_file:
             passwords_file = "passwords.txt"
 
