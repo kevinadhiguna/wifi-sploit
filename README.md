@@ -4,55 +4,79 @@
   <h3 align="center">Wi-Fi Sploit</h3>
 
   <p align="center">
-   🔒 A password cracker for an admin page of a Wi-Fi router
+   🔒 A password cracker for any login page
   </p>
 </div>
 
 <br />
 
-## Status
-
-🚧 Currently under development, originally created using Python 2.7 but trying to make it compatible with Python 3.
-
 <br />
 
 ## Prerequisites
 
-1. Your laptop/computer must be **connected to Wi-Fi** whose router will be pentested.
+1. Your laptop/computer must be **connected to the Wi-Fi** network whose router or site login page will be pentested.
 2. A laptop/computer that has `python` or `python3` installed.
 
 ### How to install Python/Python3
 
 - [Windows](https://www.python.org/downloads/windows/)
 - [MacOS](https://www.python.org/downloads/macos/)
-- Linux/Unix (Well.. python comes preinstalled on most Linux distributions. Otherwise you can download it here: https://www.python.org/downloads/source/)
+- Linux/Unix (Well.. python comes preinstalled on most Linux distributions. Otherwise, you can download it [here](https://www.python.org/downloads/source/))
 
 <br />
 
-## Before running the program..
+## About the Scripts
 
-- It is recommended to have a look at [address.md](https://github.com/kevinadhiguna/wifi-sploit/blob/master/address.md) to check Wi-Fi router's IP address.
-- Some default Wi-Fi router's usernames : [username.txt](https://github.com/kevinadhiguna/wifi-sploit/blob/master/username.txt)
-- Some default Wi-Fi router's passwords : [password.txt](https://github.com/kevinadhiguna/wifi-sploit/blob/master/password.txt)
+Wi-Fi Sploit provides three scripts:
+
+### wfs.py
+
+- This script performs password brute-forcing on a login page.
+- Initially designed for router login pages but works on any login page of a website.
+- Requires Python (compatible with both Python 2.7 and Python 3).
+- Usage: `python wfs.py`.
+- Before running, ensure you have the router's IP address, usernames, and passwords.
+
+### wfs-browser.py
+
+- Utilizes Selenium to interact with login pages through a web browser.
+- Also designed for router login pages but adaptable to other websites' login pages.
+- Requires Python and Selenium WebDriver.
+- Usage: `python wfs-browser.py`.
+- Similar prerequisites apply as in `wfs.py`.
+
+### wfs-browser-input.py
+
+- Another Selenium-based script but with customizable HTML element names.
+- Offers more flexibility in specifying HTML element names for username, password, and submit button.
+- Useful when the default element names don't match the target webpage's structure.
+- Requires Python and Selenium WebDriver.
+- Usage: `python wfs-browser-input.py`.
+- Allows users to specify HTML element names for username, password, and submit button.
 
 <br />
 
-## How to Run :
-1. Clone this repository :
+## Before Running the `wfs-browser.py` and `wfs-browser-input.py` scripts:
+
+- On linux:
+```bash
+chmod +x /PATH-TO/selenium/webdriver/common/linux/selenium-manager
+```
+- On windows: just to be sure, run the scripts as administrator
+
+## Running the Scripts
+
+1. Clone this repository:
 ```bash
 git clone https://github.com/kevinadhiguna/wifi-sploit.git
 ```
 
-<br />
-
-2. Change directory to `wifi-sploit` : 
+2. Change directory to `wifi-sploit`:
 ```bash
 cd wifi-sploit
 ```
 
-<br />
-
-3. Install dependencies :
+3. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
@@ -61,29 +85,25 @@ or
 pip3 install -r requirements.txt
 ```
 
+4. Run the desired script:
+   - For `wfs.py`: `python3 wfs.py`
+   - For `wfs-browser.py`: `python3 wfs-browser.py`
+   - For `wfs-browser-input.py`: `python3 wfs-browser-input.py`
+
 <br />
 
-4. Run this program.
+## Additional Notes
 
-<br />
-
-If you are sure about `Wi-Fi router's IP address` and `username`, try running :
-```bash
-python wfs.py
-```
-
-Note: You can also run it with python3. In case of that, just replace `python` with `python3`.
-
-<br/>
-
-5. You will see the appropriate password. Otherwise, the correct password may not be listed in the `password.txt`. In that case, you can add the most commonly used password in the `password.txt`.
+- It is recommended to check out the `address.md` file for the Wi-Fi router's IP address before running the scripts.
+- Default usernames and passwords for Wi-Fi routers can be found in the `username.txt` and `password.txt` files, respectively.
+- Remember, these tools are for educational purposes only. Misuse is not condoned.
 
 <br />
 <hr />
 
 ## Disclaimer
 
-<b>I am not responsible for any misuse. This tool is only for educational purpose.</b>
+<b>I am not responsible for any misuse. These tools are only for educational purposes.</b>
 
 <br />
 
