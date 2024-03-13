@@ -1,6 +1,18 @@
 import requests
 import sys
 
+line1 = "__        _______ ____"
+line2 = "\ \      / /  ___/ ___| YOUR"
+line3 = " \ \ /\ / /| |_  \___ \ LOGIN"
+line4 = "  \ V  V / |  _|  ___) |PAGE"
+line5 = "   \_/\_/  |_|   |____/ SPLOIT"
+
+print(line1)
+print(line2)
+print(line3)
+print(line4)
+print(line5)
+
 usage = input("Show URL usage? y/n: ")
 if usage.lower() == "y":
     print("Enter the login page URL, for example: https://site.com:1234/login-page/login.html ")
