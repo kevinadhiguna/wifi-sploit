@@ -10,8 +10,8 @@
 
 ## About
 
- - Originally maded for `python2` but it runs using `pyhon3` too.
- - Originally it was maded for router's login pages but it works fine in any login page site, even on internet.
+ - Originally made for `python2` but it runs using `pyhon3` too.
+ - Originally it was made for router's login pages but it works fine in any login page site, even on internet.
 
 ## Prerequisites
 
